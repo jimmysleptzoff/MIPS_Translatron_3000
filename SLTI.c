@@ -1,6 +1,6 @@
 /*
-* Author: Ol' Jim
-* Date: 06/13/2012
+* Author: Aiden Ballard
+* Date: 10/29/25
 * ByteForge Systems
 * MIPS-Translatron 3000
 */
@@ -34,7 +34,7 @@ void slti_immd_assm(void) {
 
 	// This is our comparison immediate, so param 3 needs to be an immediate
 	if (PARAM3.type != IMMEDIATE) {
-		state = MISSING_REG;
+		state = INVALID_IMMED;
 		return;
 	}
 
@@ -54,9 +54,9 @@ void slti_immd_assm(void) {
 		return;
 	}
 
-	// Imm should be between -32,768 and +32,767.
-	if (PARAM3.value > 32767 || PARAM3.value < -32768) {
-		state = INVALID_IMMED;
+	// imm16 should be between 16 bits, signed
+	if (PARAM3.value > 0xFFFF) {
+		state = MISSING_PARAM;
 		return;
 	}
 
@@ -65,7 +65,7 @@ void slti_immd_assm(void) {
 	*/
 
 	// Set the opcode
-	setBits_num(31, 001010, 6);
+	setBits_str(31, "001010");
 
 	// set Rs
 	setBits_num(25, PARAM2.value, 5);
@@ -99,7 +99,7 @@ void slti_immd_bin(void) {
 	// getBits(start_bit, width)
 	uint32_t Rs = getBits(25, 5); 
 	uint32_t Rt = getBits(20, 5);
-	uint32_t imm = getBits(15, 16);
+	uint32_t imm16= getBits(15, 16);
 
 	/*
 		Setting Instuciton values
@@ -110,7 +110,7 @@ void slti_immd_bin(void) {
 	//setParam(param_num, param_type, param_value)
 	setParam(1, REGISTER, Rt); //destination
 	setParam(2, REGISTER, Rs); //first source register operand
-	setParam(3, IMMEDIATE, imm); //immediate value
+	setParam(3, IMMEDIATE, imm16); //immediate value
 
 
 	// tell the system the decoding is done
