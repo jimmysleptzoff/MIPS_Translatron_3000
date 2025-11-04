@@ -1,8 +1,5 @@
 /*
-* Author: Ol' Jim
-* Date: 06/13/2012
-* ByteForge Systems
-* MIPS-Translatron 3000
+* Edits: Seth Scott
 */
 
 #include "Instruction.h"
@@ -43,19 +40,22 @@ void slt_reg_assm(void) {
 	*/
 
 	// Rd should be 31 or less
-	if (PARAM1.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM1.value >= 31) {
 		state = INVALID_REG;
 		return;
 	}
 
 	// Rs should be 31 or less
-	if (PARAM2.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM2.value >= 31) {
 		state = INVALID_REG;
 		return;
 	}
 
 	// Rt should be 31 or less
-	if (PARAM3.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM3.value >= 31) {
 		state = INVALID_REG;
 		return;
 	}
@@ -63,21 +63,14 @@ void slt_reg_assm(void) {
 	/*
 		Putting the binary together
 	*/
-
-	// Set the opcode
+	//CHANGE: Made bits in order, to ease confusion
 	setBits_num(31, 0, 6);
-
-	// Set the funct 
-	setBits_str(5, "101010");
-
-	// set Rd
-	setBits_num(20, PARAM1.value, 5);
-
-	// set Rs
-	setBits_num(25, PARAM2.value, 5);
-
-	// set Rt
-	setBits_num(15, PARAM3.value, 5);
+	setBits_num(25, PARAM2.value, 5); //RS
+	setBits_num(20, PARAM1.value, 5); //RD
+	setBits_num(15, PARAM3.value, 5); //RT
+	//CHANGE: Was mising shamt bits, all 0s
+	setBits_num(10, 0, 5); //shamt
+	setBits_str(5, "101010"); //funct
 
 	// tell the system the encoding is done
 	state = COMPLETE_ENCODE;
@@ -99,9 +92,10 @@ void slt_reg_bin(void) {
 		Finding values in the binary
 	*/
 	// getBits(start_bit, width)
-	uint32_t Rd = getBits(15, 5);
+	//CHANGE: Fixed bit order
 	uint32_t Rs = getBits(25, 5);
 	uint32_t Rt = getBits(20, 5);
+	uint32_t Rd = getBits(15, 5);
 
 	/*
 		Setting Instuciton values

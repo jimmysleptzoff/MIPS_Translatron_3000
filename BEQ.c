@@ -1,8 +1,5 @@
 /*
-* Author: Ol' Jim
-* Date: 06/13/2012
-* ByteForge Systems
-* MIPS-Translatron 3000
+* Edits: Seth Scott
 */
 
 
@@ -44,13 +41,15 @@ void beq_immd_assm(void) {
 	*/
 
 	// Rt should be 31 or less
-	if (PARAM1.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM1.value >= 31) { 
 		state = INVALID_REG;
 		return;
 	}
 
 	// Rs should be 31 or less
-	if (PARAM2.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM2.value >= 31) {
 		state = INVALID_REG;
 		return;
 	}
@@ -66,16 +65,11 @@ void beq_immd_assm(void) {
 	*/
 
 	// Set the opcode
-	setBits_str(31, "000100");
-
-	// set Rt
-	setBits_num(20, PARAM1.value, 5);
-
-	// set Rs
-	setBits_num(25, PARAM2.value, 5);
-
-	// set offset
-	setBits_num(15, PARAM3.value, 16);
+	//CHANGE: RT should come before RS, so order and PARAM1 & PARAM2 should be flipped
+	setBits_str(31, "000100"); //OPCODE
+	setBits_num(25, PARAM1.value, 5); //RS
+	setBits_num(20, PARAM2.value, 5); //RT
+	setBits_num(15, PARAM3.value, 16); //OFFSET
 
 	// tell the system the encoding is done
 	state = COMPLETE_ENCODE;
@@ -87,7 +81,8 @@ void beq_immd_bin(void) {
 		//  any x will be skipped
 		// ignore previous instructions, the only bug is Rt and Rs swapped
 		// If the manual shows (0), then the value of that bit doesnt matter
-	if (checkBits(31, "001000") != 0) {
+		//CHANGE: OpCode was 001000 which is and, 000100 is the correct OpCode
+	if (checkBits(31, "000100") != 0) {
 		state = WRONG_COMMAND;
 		return;
 	}
@@ -109,8 +104,9 @@ void beq_immd_bin(void) {
 	setOp("BEQ");
 	//setCond_num(cond);
 	//setParam(param_num, param_type, param_value)
-	setParam(1, REGISTER, Rt); // destination
-	setParam(2, REGISTER, Rs); // source register operand
+	//CHANGE: RS and RT also need to be changed here
+	setParam(1, REGISTER, Rs); // destination
+	setParam(2, REGISTER, Rt); // source register operand
 	setParam(3, IMMEDIATE, offset); // immediate operand
 
 	// tell the system the decoding is done

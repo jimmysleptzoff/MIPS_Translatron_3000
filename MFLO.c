@@ -1,3 +1,7 @@
+/*
+* Edits: Seth Scott
+*/
+
 #include "Instruction.h"
 
 void mflo_reg_assm(void) {
@@ -33,13 +37,15 @@ void mflo_reg_assm(void) {
 	*/
 	// Set the opcode
 	setBits_str(31, "000000");
+	//set 25-16 to 0's
+	//CHANGE: Needed to add new lines so that 25-16 are 0's
+	setBits_str(25, "00000");
+	setBits_str(20, "00000");
 	// set rd
 	setBits_num(15, PARAM1.value, 5);
 
 	// Set the funct 
 	setBits_str(5, "010000");
-	// set 25-16 as 0s 
-	setBits_str(10, "000000");
 
 	// set 10-6 as 0s 
 	setBits_str(10, "00000");

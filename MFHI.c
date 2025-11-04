@@ -1,3 +1,7 @@
+/*
+* Edits: Seth Scott
+*/
+
 #include "Instruction.h"
 
 void mfhi_reg_assm(void) {
@@ -22,7 +26,8 @@ void mfhi_reg_assm(void) {
 		Checking the value of parameters
 	*/
 	// Rd should be 31 or less
-	if (PARAM1.value > 31) {
+	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
+	if (PARAM1.value >= 31) {
 		state = INVALID_REG;
 		return;
 	}
@@ -32,8 +37,7 @@ void mfhi_reg_assm(void) {
 	*/
 	// Set the opcode
 	setBits_str(31, "000000");
-	// set rd
-	setBits_num(15, PARAM1.value, 5);
+	setBits_num(15, PARAM1.value, 5);//RD
 
 	// Set the funct 
 	setBits_str(5, "010010");
