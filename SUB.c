@@ -1,7 +1,7 @@
 /*
-* Author: Ol' Jim
-* Date: 06/13/2012
-* ByteForge Systems
+* Author: Ol' Jim and James Sleptzoff
+* Date: 11/4/2025
+* ByteForge Systems & West Virginia University
 * MIPS-Translatron 3000
 */
 
@@ -38,7 +38,6 @@ void sub_reg_assm(void) {
 		return;
 	}
 
-
 	/*
 		Checking the value of parameters
 	*/
@@ -60,8 +59,6 @@ void sub_reg_assm(void) {
 		state = INVALID_REG;
 		return;
 	}
-
-	
 
 	/*
 		Putting the binary together

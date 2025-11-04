@@ -89,7 +89,7 @@ void add_reg_bin(void) {
 	// Check if the op code bits match
 	// check_bits(start_bit, bit_string) returns 0 if the bit_string matches
 	//  any x will be skipped
-	// If the manual shows (0), then the value of that bit doesnt matter
+	// If the manual shows (0), then the value of that bit doesn't matter
 	if (checkBits(31, "000000") != 0 || checkBits(5, "100000") != 0) {
 		state = WRONG_COMMAND;
 		return;
