@@ -1,4 +1,5 @@
 #include "MIPS_Interpreter.h"
+#include <stdio.h>
 
 int main(void) {
 	// inializes everything
@@ -41,16 +42,66 @@ int main(void) {
 }
 
 /*
-	Purpose: dummy function to test code
+	Purpose: Test benchmark, run through the test_assem.txt file and test each line
 	Params: none
 	Return: none
 */
 void test(void) {
-	char* buff = "AND $t1, $t2, $t3";
-	printf("%s\n", buff);
-	parseAssem(buff);
-	printResult();
-	printAssm();
+
+	// Pointer to our test file
+	FILE *test_file_ptr;
+	test_file_ptr = fopen("test_assem.txt", "r");
+
+	// Check if file opened successfully
+	if (test_file_ptr == NULL) {
+		printf("Error: Could not open test file.\n");
+		return; // Exit
+	}
+
+	// reading line by line
+	// test each assembly code line
+	char line[BUFF_SIZE];
+	int tests_passed = 0;
+	int test_failed = 0;
+
+	while (fgets(line, sizeof(line), test_file_ptr) != NULL) {
+		// Remove trailing newline character if present
+		line[strcspn(line, "\n")] = '\0';
+		char pass_fail = line[0]; // First character indicates pass/fail
+		memmove(line, line + 2, strlen(line) - 1); // Shift line to remove pass/fail indicator
+		printf("Testing line: %s, Result [%c]\n", line, pass_fail);
+
+		// parse the instruction
+		parseAssem(line);
+		// checks if there was an error, and encodes if there wasn't
+		if (state == NO_ERROR) {
+			encode();
+			printResult();
+			if (state == COMPLETE_ENCODE) {
+				printAssm();
+			} else {
+				printf("Test failed during encoding.\n");
+				if (pass_fail == 'P') {
+					test_failed++;
+				} else {
+					tests_passed++;
+				}
+			}
+		} else {
+			if (pass_fail == 'P') {
+				test_failed++;
+			} else {
+				tests_passed++;
+			}
+			printf("Error encountered during parsing.\n");
+		}
+		printf("\n");
+		
+	}
+	// print results
+	printf("Tests Passed: %d, Tests Failed: %d\n", tests_passed, test_failed);
+
+	fclose(test_file_ptr);
 }
 
 /*
