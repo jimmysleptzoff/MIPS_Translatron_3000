@@ -64,7 +64,7 @@ void mfhi_reg_bin(void) {
 
 	// getBits(start_bit, width)
 	//Change, gets only the RD bits from 15 to 11
-	uint32_t Rd = getBits(15, 11);
+	uint32_t Rd = getBits(15, 5);
 	/*
 		Setting Instuciton values
 	*/
