@@ -1,5 +1,7 @@
 #include "Instruction.h"
 
+// File edited by Zachary Jeckering
+
 void andi_immd_assm(void) {
 
 	// Check that the opcode matches
@@ -27,7 +29,6 @@ void andi_immd_assm(void) {
 
 	// This is ANDI, so param 3 needs to be an immediate value
 	if (PARAM3.type != IMMEDIATE) {
-		printf("Error: PARAM3 is not IMMEDIATE. Got type=%d\n", PARAM3.type);
 		state = INVALID_PARAM;
 		return;
 	}

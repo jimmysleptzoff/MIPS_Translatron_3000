@@ -1,5 +1,7 @@
 #include "Instruction.h"
 
+// File edited by Zachary Jeckering
+
 void and_reg_assm(void) {
 	// Checking that the op code matches
 	// strcmp(string1, string2) return 0 if they match
