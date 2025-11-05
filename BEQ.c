@@ -41,15 +41,13 @@ void beq_immd_assm(void) {
 	*/
 
 	// Rt should be 31 or less
-	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
-	if (PARAM1.value >= 31) { 
+	if (PARAM1.value > 31) { 
 		state = INVALID_REG;
 		return;
 	}
 
 	// Rs should be 31 or less
-	// CHANGE: In order to account for 31 or less, needs to be changed from just > to >=
-	if (PARAM2.value >= 31) {
+	if (PARAM2.value > 31) {
 		state = INVALID_REG;
 		return;
 	}
