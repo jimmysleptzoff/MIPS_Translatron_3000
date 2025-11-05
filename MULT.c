@@ -1,6 +1,11 @@
 #include "Instruction.h"
 
-// will do later
+/*
+* Author: Aiden Ballard
+* Date: 10/30/25
+* ByteForge Systems
+* MIPS-Translatron 3000
+*/
 
 void mult_reg_assm(void) {
 	// Checking that the op code matches
