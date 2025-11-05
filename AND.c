@@ -63,17 +63,17 @@ void and_reg_assm(void) {
 	// Set the opcode
 	setBits_num(31, 0, 6);
 
+	// Set rs (bits 25–21)
+	setBits_num(25, PARAM2.value, 5);
+
+	// Set rt (bits 20–16)
+	setBits_num(20, PARAM3.value, 5);
+
+	// Set rd (bits 15–11)
+	setBits_num(15, PARAM1.value, 5);
+
 	// Set the funct 
 	setBits_str(5, "100100");
-
-	// set Rd
-	setBits_num(25, PARAM1.value, 5);
-
-	// set Rs
-	setBits_num(15, PARAM2.value, 5);
-
-	// set Rt
-	setBits_num(20, PARAM3.value, 5);
 
 	// tell the system the encoding is done
 	state = COMPLETE_ENCODE;
