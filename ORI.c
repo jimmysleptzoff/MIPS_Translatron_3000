@@ -61,6 +61,14 @@ void ori_immd_assm(void) {
 	}
 
 	/*
+		Encoding ORI:
+		opcode (6): 001101
+		rs (5): PARAM2
+		rt (5): PARAM1
+		immediate (16): PARAM3
+	*/
+
+	/*
 		Putting the binary together
 	*/
 

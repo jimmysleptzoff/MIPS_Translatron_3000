@@ -1,0 +1,67 @@
+P ADD $t0, $t1, $t2
+P ADD $s0, $s1, $s2
+F ADD $t0, $t1, $t32
+F ADD $t0, $t1
+P ADDI $t0, $t1, #32767
+P ADDI $t0, $t1, #0xFFFF
+F ADDI $t0, $t1
+P AND $t0, $t1, $t2
+P AND $s0, $s1, $s2
+F AND $t0, $t1, $t32
+F AND $t0, $t1 
+P ANDI $t0, $t1, #65535
+F ANDI $t0, $t1, #-1
+F ANDI $t0, $t1, #70000
+F ANDI $t0, $t1
+P BEQ $t0, $t1, #1024
+P BEQ $s0, $s1, #0xFC00
+F BEQ $t0, $t1
+P BNE $t0, $t1, #1024
+P BNE $s0, $s1, #0xFC00
+F BNE $t0, $t1
+P DIV $t0, $t1
+P DIV $s0, $s1
+F DIV $t0, $t32
+F DIV $t0
+P LUI $t0, #65535
+F LUI $t0, #-1
+F LUI $t0, #70000
+F LUI $t0
+P LW $t0, #0($t1)
+P LW $t0, #32767($s1)
+P LW $t0, #0xFFFF($s1)
+F LW $t0, ($s1)
+P MFHI $t0
+F MFHI $t32
+F MFHI
+P MFLO $t0
+F MFLO $t32
+F MFLO
+P MULT $t0, $t1
+P MULT $s0, $s1
+F MULT $t0, $t32
+F MULT $t0
+P OR $t0, $t1, $t2
+P OR $s0, $s1, $s2
+F OR $t0, $t1, $t32
+F OR $t0, $t1
+P ORI $t0, $t1, #65535
+F ORI $t0, $t1, #-1
+F ORI $t0, $t1, #70000
+F ORI $t0, $t1
+P SLT $t0, $t1, $t2
+P SLT $s0, $s1, $s2
+F SLT $t0, $t1, $t32
+F SLT $t0, $t1
+P SLTI $t0, $t1, #32767
+P SLTI $t0, $t1, #0xFFFF
+F SLTI $t0, $t1
+F SLTI $t0, $t1, 70000
+P SUB $t0, $t1, $t2
+P SUB $s0, $s1, $s2
+F SUB $t0, $t1, $t32
+F SUB $t0, $t1
+P SW $t0, #0($t1)
+P SW $t0, #32767($s1)
+P SW $t0, #0xFFFF($s1)
+F SW $t0, ($s1)

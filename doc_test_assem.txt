@@ -1,0 +1,103 @@
+# ADD Tests
+ADD $t0, $t1, $t2
+ADD $s0, $s1, $s2
+ADD $t0, $t1, $t32  # INVALID register number
+ADD $t0, $t1        # MISSING operand
+
+# ADDI Tests
+ADDI $t0, $t1, 32767  # MAX immediate
+ADDI $t0, $t1, -32768 # MIN immediate
+ADDI $t0, $t1, 70000  # INVALID overflow
+ADDI $t0, $t1         # MISSING immediate
+
+# AND Tests
+AND $t0, $t1, $t2
+AND $s0, $s1, $s2
+AND $t0, $t1, $t32  # INVALID register
+AND $t0, $t1        # MISSING operand
+
+# ANDI Tests
+ANDI $t0, $t1, 65535  # MAX unsigned immediate
+ANDI $t0, $t1, -1      # INVALID negative immediate
+ANDI $t0, $t1, 70000   # INVALID overflow
+ANDI $t0, $t1          # MISSING immediate
+
+# BEQ Tests
+BEQ $t0, $t1, 1024
+BEQ $s0, $s1, -1024
+BEQ $t0, $t1         # MISSING offset
+
+# BNE Tests
+BNE $t0, $t1, 1024
+BNE $s0, $s1, -1024
+BNE $t0, $t1         # MISSING offset
+
+# DIV Tests
+DIV $t0, $t1
+DIV $s0, $s1
+DIV $t0, $t32  # INVALID register
+DIV $t0        # MISSING operand
+
+# LUI Tests
+LUI $t0, 65535  # MAX immediate
+LUI $t0, -1      # INVALID negative immediate
+LUI $t0, 70000   # INVALID overflow
+LUI $t0          # MISSING immediate
+
+# LW Tests
+LW $t0, 0($t1)
+LW $t0, 32767($s1)  # MAX offset
+LW $t0, -32768($s1) # MIN offset
+LW $t0, ($s1)       # MISSING offset
+
+# MFHI Tests
+MFHI $t0
+MFHI $t32  # INVALID register
+MFHI       # MISSING operand
+
+# MFLO Tests
+MFLO $t0
+MFLO $t32  # INVALID register
+MFLO       # MISSING operand
+
+# MULT Tests
+MULT $t0, $t1
+MULT $s0, $s1
+MULT $t0, $t32  # INVALID register
+MULT $t0        # MISSING operand
+
+# OR Tests
+OR $t0, $t1, $t2
+OR $s0, $s1, $s2
+OR $t0, $t1, $t32  # INVALID register
+OR $t0, $t1        # MISSING operand
+
+# ORI Tests
+ORI $t0, $t1, 65535  # MAX unsigned immediate
+ORI $t0, $t1, -1      # INVALID negative immediate
+ORI $t0, $t1, 70000   # INVALID overflow
+ORI $t0, $t1          # MISSING immediate
+
+# SLT Tests
+SLT $t0, $t1, $t2
+SLT $s0, $s1, $s2
+SLT $t0, $t1, $t32  # INVALID register
+SLT $t0, $t1        # MISSING operand
+
+# SLTI Tests
+SLTI $t0, $t1, 32767  # MAX immediate
+SLTI $t0, $t1, -32768 # MIN immediate
+SLTI $t0, $t1, 70000  # INVALID overflow
+SLTI $t0, $t1         # MISSING immediate
+
+# SUB Tests
+SUB $t0, $t1, $t2
+SUB $s0, $s1, $s2
+SUB $t0, $t1, $t32  # INVALID register
+SUB $t0, $t1        # MISSING operand
+
+# SW Tests
+SW $t0, 0($t1)
+SW $t0, 32767($s1)  # MAX offset
+SW $t0, -32768($s1) # MIN offset
+SW $t0, ($s1)       # MISSING offset
