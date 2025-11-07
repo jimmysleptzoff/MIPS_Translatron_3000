@@ -1,8 +1,9 @@
 /*
-* Author: Ol' Jim and James Sleptzoff
-* Date: 11/4/2025
-* ByteForge Systems & West Virginia University
+* Author: Ol' Jim
+* Date: 06/13/2012
+* ByteForge Systems
 * MIPS-Translatron 3000
+* Edits: James Sleptzoff
 */
 
 #include "Instruction.h"

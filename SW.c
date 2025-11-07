@@ -1,8 +1,9 @@
 /*
-* Author: Ol' Jim and James Sleptzoff
-* Date: 11/4/2025
-* ByteForge Systems & West Virginia University
+* Author: Ol' Jim
+* Date: 06/13/2012
+* ByteForge Systems
 * MIPS-Translatron 3000
+* Edits: James Sleptzoff
 */
 
 #include "Instruction.h"
@@ -68,7 +69,7 @@ void sw_immd_assm(void) {
        Encoding SW:
        opcode (6): 101011
        Rt (5): PARAM1
-       imm16 (16): PARAM2
+       offset (16): PARAM2
        Rs (5): PARAM3
    */
 
@@ -106,7 +107,7 @@ void sw_immd_bin(void) {
     // getBits(start_bit, width)
 	uint32_t Rs = getBits(25, 5);
 	uint32_t Rt = getBits(20, 5);
-	uint32_t imm16 = getBits(15, 16);
+	uint32_t offset = getBits(15, 16);
 
     /*
         Setting Instuciton values
@@ -116,7 +117,7 @@ void sw_immd_bin(void) {
     //setCond_num(cond);
     //setParam(param_num, param_type, param_value)
 	setParam(1, REGISTER, Rt); // Source data register
-    setParam(2, IMMEDIATE, imm16); // imm16 value
+    setParam(2, IMMEDIATE, offset); // offset value
 	setParam(3, REGISTER, Rs); // Register with data memory base address
 
     // Tell the system the decoding is done

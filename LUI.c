@@ -1,8 +1,9 @@
 /*
-* Author: Ol' Jim and James Sleptzoff
-* Date: 11/4/2025
-* ByteForge Systems & West Virginia University
+* Author: Ol' Jim
+* Date: 06/13/2012
+* ByteForge Systems
 * MIPS-Translatron 3000
+* Edits: James Sleptzoff
 */
 
 #include "Instruction.h"
@@ -59,7 +60,7 @@ void lui_immd_assm(void) {
 	setBits_num(20, PARAM1.value, 5);
     
     // Set Rs to 00000
-    setBits_num(25, 00000, 5);
+    setBits_num(25, 0, 5);
     
     // Set immediate
 	setBits_num(15, PARAM2.value, 16);
